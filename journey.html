@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script>
+        if (localStorage.getItem('luma_logged_in') !== 'true') {
+            window.location.replace('/login');
+        }
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Journey | Luma</title>
@@ -111,9 +116,9 @@
                     <p style="font-size: 0.82rem; color: var(--color-text-muted); margin-top: 0.4rem;">Week 3 of 8 • Est. Aug 28</p>
                 </div>
                 <div style="display: flex; flex-direction: column; align-items: center; gap: 0.4rem;">
-                    <div style="font-size: 1.5rem; font-weight: 700; color: var(--color-primary);">38%</div>
+                    <div id="journey-progress-percent" style="font-size: 1.5rem; font-weight: 700; color: var(--color-primary);">0%</div>
                     <div style="width: 70px; height: 6px; background-color: var(--color-neutral); border-radius: 3px; overflow: hidden;">
-                        <div style="width: 38%; height: 100%; background: linear-gradient(90deg, var(--color-primary), var(--color-secondary)); border-radius: 3px;"></div>
+                        <div id="journey-progress-bar" style="width: 0%; height: 100%; background: linear-gradient(90deg, var(--color-primary), var(--color-secondary)); border-radius: 3px;"></div>
                     </div>
                 </div>
             </div>
@@ -357,11 +362,11 @@
                     <div style="display: flex; gap: 2rem;">
                         <div>
                             <span style="font-size: 0.8rem; text-transform: uppercase; color: var(--color-text-muted); font-weight: 700;">Current Streak</span>
-                            <h4 style="font-size: 1.55rem; font-weight: 700; color: var(--color-text-heading); margin-top: 0.2rem;">🔥 12 Days</h4>
+                            <h4 id="journey-streak-value" style="font-size: 1.55rem; font-weight: 700; color: var(--color-text-heading); margin-top: 0.2rem;">🔥 0 Days</h4>
                         </div>
                         <div>
                             <span style="font-size: 0.8rem; text-transform: uppercase; color: var(--color-text-muted); font-weight: 700;">Longest Streak</span>
-                            <h4 style="font-size: 1.55rem; font-weight: 700; color: var(--color-text-heading); margin-top: 0.2rem;">21 Days</h4>
+                            <h4 style="font-size: 1.55rem; font-weight: 700; color: var(--color-text-heading); margin-top: 0.2rem;">0 Days</h4>
                         </div>
                     </div>
                     <p style="font-size: 0.92rem; color: var(--color-text-body); line-height: 1.45; font-family: 'Inter', sans-serif;">
@@ -388,7 +393,7 @@
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
                         </div>
                         <div class="quick-stats-info">
-                            <span class="quick-stats-value">18</span>
+                            <span id="journey-lessons-count" class="quick-stats-value">0</span>
                             <span class="quick-stats-label">Lessons Completed</span>
                         </div>
                     </div>
@@ -398,7 +403,7 @@
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
                         </div>
                         <div class="quick-stats-info">
-                            <span class="quick-stats-value">5</span>
+                            <span class="quick-stats-value">0</span>
                             <span class="quick-stats-label">Challenges Finished</span>
                         </div>
                     </div>
@@ -408,7 +413,7 @@
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline></svg>
                         </div>
                         <div class="quick-stats-info">
-                            <span class="quick-stats-value">2</span>
+                            <span id="journey-projects-count" class="quick-stats-value">0</span>
                             <span class="quick-stats-label">Projects Built</span>
                         </div>
                     </div>
@@ -418,8 +423,8 @@
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
                         </div>
                         <div class="quick-stats-info">
-                            <span class="quick-stats-value">24h</span>
-                            <span class="quick-stats-label">Learning Hours</span>
+                            <span id="journey-learning-time" class="quick-stats-value">0 minutes</span>
+                            <span class="quick-stats-label">Estimated Learning Time</span>
                         </div>
                     </div>
                 </div>

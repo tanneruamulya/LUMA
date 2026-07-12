@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script>
+        if (localStorage.getItem('luma_logged_in') !== 'true') {
+            window.location.replace('/login');
+        }
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Luma — Premium AI Learning Dashboard</title>
@@ -120,7 +125,7 @@
                     </button>
                     <div class="header-dropdown-menu" id="dash-avatar-dropdown">
                         <div class="dropdown-user-info" style="border-bottom: 1px solid var(--color-neutral); padding-bottom: 0.75rem; margin-bottom: 0.5rem;">
-                            <p class="dropdown-user-name" id="dropdown-name" style="font-weight: 700;">Amulya R.</p>
+                            <p class="dropdown-user-name" id="dropdown-name" style="font-weight: 700;">Amulya Tanneru</p>
                             <p class="dropdown-user-email" id="dropdown-email" style="font-size: 0.8rem; color: var(--color-text-muted);">you@example.com</p>
                         </div>
                         <div class="dropdown-links-list" style="display: flex; flex-direction: column; gap: 0.4rem;">
@@ -154,10 +159,10 @@
                             <div class="week-progress-wrapper" style="width: 100%; margin-top: 0.5rem;">
                                 <div class="week-header" style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 600; color: var(--color-text-body); margin-bottom: 0.4rem;">
                                     <span>Milestone progress</span>
-                                    <span style="color: var(--color-primary);">65%</span>
+                                    <span id="dash-milestone-progress-text" style="color: var(--color-primary);">0%</span>
                                 </div>
                                 <div class="progress-track" style="height: 8px; width: 100%; background-color: var(--color-neutral); border-radius: 4px; overflow: hidden;">
-                                    <div class="progress-bar" style="width: 65%; height: 100%; background: linear-gradient(90deg, var(--color-secondary), var(--color-primary)); border-radius: 4px;"></div>
+                                    <div id="dash-milestone-progress-bar" class="progress-bar" style="width: 0%; height: 100%; background: linear-gradient(90deg, var(--color-secondary), var(--color-primary)); border-radius: 4px;"></div>
                                 </div>
                             </div>
                             
@@ -293,7 +298,7 @@
                 <div class="streak-card-glow">
                     <div class="streak-title-row">
                         <span>🔥</span>
-                        <span>12 Day Streak</span>
+                        <span id="dash-streak-value">0 Days</span>
                     </div>
                     <div class="streak-days-row">
                         <span class="streak-day-dot completed" title="Monday Completed">M</span>
@@ -318,9 +323,9 @@
                             <circle class="progress-circle-bg" cx="60" cy="60" r="54" stroke-width="8" fill="transparent" />
                             <circle class="progress-circle-fill" cx="60" cy="60" r="54" stroke-width="8" fill="transparent" />
                         </svg>
-                        <span class="progress-percentage-label">65%</span>
+                        <span class="progress-percentage-label">0%</span>
                     </div>
-                    <p style="font-size: 0.95rem; color: var(--color-text-body); font-weight: 500; margin-top: 0.5rem;">You're making great progress!</p>
+                    <p id="dash-progress-message" style="font-size: 0.95rem; color: var(--color-text-body); font-weight: 500; margin-top: 0.5rem;">Your journey starts today. Complete your first lesson to begin tracking your progress.</p>
                 </div>
 
                 <!-- Top Interests Card -->
@@ -344,7 +349,7 @@
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path></svg>
                         Today's Reminder
                     </span>
-                    <p style="font-size: 0.95rem; color: var(--color-text-body); line-height: 1.6;">"You haven't completed today's lesson yet."</p>
+                    <p id="dash-reminder-text" style="font-size: 0.95rem; color: var(--color-text-body); line-height: 1.6;">Your journey starts today. Complete your first lesson to begin tracking your progress.</p>
                     <div>
                         <button class="btn btn-outline btn-full" style="padding: 0.65rem 0;" onclick="window.location.href='/learning-hub';">Resume Learning</button>
                     </div>

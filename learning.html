@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script>
+        if (localStorage.getItem('luma_logged_in') !== 'true') {
+            window.location.replace('/login');
+        }
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Learning Hub | Luma</title>
@@ -111,9 +116,9 @@
                     <p style="font-size: 0.82rem; color: var(--color-text-muted); margin-top: 0.4rem;">6 Weeks Remaining</p>
                 </div>
                 <div style="display: flex; flex-direction: column; align-items: center; gap: 0.4rem;">
-                    <div style="font-size: 1.5rem; font-weight: 700; color: var(--color-primary);">38%</div>
+                    <div id="learning-progress-percent" style="font-size: 1.5rem; font-weight: 700; color: var(--color-primary);">0%</div>
                     <div style="width: 70px; height: 6px; background-color: var(--color-neutral); border-radius: 3px; overflow: hidden;">
-                        <div style="width: 38%; height: 100%; background: linear-gradient(90deg, var(--color-primary), var(--color-secondary)); border-radius: 3px;"></div>
+                        <div id="learning-progress-bar" style="width: 0%; height: 100%; background: linear-gradient(90deg, var(--color-primary), var(--color-secondary)); border-radius: 3px;"></div>
                     </div>
                 </div>
             </div>
@@ -302,10 +307,10 @@
                 <div class="streak-card-glow">
                     <div class="streak-title-row">
                         <span>🔥</span>
-                        <span>12 Day Streak</span>
+                        <span id="dash-streak-value">0 Days</span>
                     </div>
-                    <p style="font-size: 0.92rem; color: var(--color-text-body); line-height: 1.45; font-family: 'Inter', sans-serif;">
-                        Keep your streak alive by completing one concept today.
+                    <p id="learning-progress-caption" style="font-size: 0.92rem; color: var(--color-text-body); line-height: 1.45; font-family: 'Inter', sans-serif;">
+                        Start your first lesson to begin tracking progress.
                     </p>
                 </div>
 

@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script>
+        if (localStorage.getItem('luma_logged_in') !== 'true') {
+            window.location.replace('/login');
+        }
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Recommendations | Luma</title>
@@ -477,16 +482,49 @@
             };
 
             // Start Journey CTA Click Handler
-            startBtn.addEventListener('click', () => {
+            startBtn.addEventListener('click', async () => {
+                if (startBtn.disabled) return;
+
                 const selectedPath = document.getElementById('selected-path-name').value || 'UI/UX Design';
-                localStorage.setItem('luma_career_path', selectedPath);
-                
-                // Set assessment as complete so they can enter platform
-                localStorage.setItem('luma_assessment_completed', 'true');
-                
-                // Alert and Redirect
-                alert(`Starting your journey in ${selectedPath}! Enjoy Luma!`);
-                window.location.href = '/dashboard';
+                const originalText = startBtn.textContent;
+                startBtn.disabled = true;
+                startBtn.textContent = 'Setting up your dashboard...';
+                startBtn.style.opacity = '0.9';
+
+                try {
+                    const answersStr = localStorage.getItem('luma_assessment_answers');
+                    const assessmentData = answersStr ? JSON.parse(answersStr) : {};
+
+                    const recommendations = {
+                        selectedPath,
+                        interests: assessmentData.interests || [],
+                        completedAt: new Date().toISOString()
+                    };
+
+                    localStorage.setItem('luma_career_path', selectedPath);
+                    localStorage.setItem('luma_assessment_completed', 'true');
+                    localStorage.setItem('luma_recommendations', JSON.stringify(recommendations));
+
+                    await Promise.resolve();
+                    window.location.replace('/dashboard');
+                } catch (error) {
+                    console.error('Failed to finalize assessment', error);
+                    startBtn.disabled = false;
+                    startBtn.textContent = originalText;
+                    startBtn.style.opacity = '1';
+
+                    const existingError = document.getElementById('journey-error-msg');
+                    if (existingError) {
+                        existingError.textContent = 'We could not set up your dashboard. Please try again.';
+                        existingError.style.display = 'block';
+                    } else {
+                        const errorNode = document.createElement('p');
+                        errorNode.id = 'journey-error-msg';
+                        errorNode.style.cssText = 'margin-top: 0.75rem; color: #EA4335; font-size: 0.95rem;';
+                        errorNode.textContent = 'We could not set up your dashboard. Please try again.';
+                        startBtn.insertAdjacentElement('afterend', errorNode);
+                    }
+                }
             });
         });
     </script>

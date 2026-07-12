@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script>
+        if (localStorage.getItem('luma_logged_in') !== 'true') {
+            window.location.replace('/login');
+        }
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Concept Resources | Luma</title>
@@ -195,8 +200,8 @@
                     skills: ['Problem Framing', 'Ideation', 'Empathy Mapping', 'Testing Iterations'],
                     tip: 'Spend time studying the Empathy mapping phase. It serves as the foundation for the entire framework.',
                     resources: [
-                        { type: 'guide', title: 'Guide: The 5 Phases of Design Thinking', desc: 'Interactive slide presentation explaining Empathize to Test.', dur: '8 mins' },
-                        { type: 'read', title: 'Article: Brainstorming without Constraints', desc: 'Learn how to generate 50+ divergent ideas during brainstorming.', dur: '7 mins' }
+                        { id: 'design-thinking-guide', type: 'guide', title: 'Guide: The 5 Phases of Design Thinking', desc: 'Interactive slide presentation explaining Empathize to Test.', dur: '8 mins', minutes: 8 },
+                        { id: 'design-thinking-brainstorm', type: 'read', title: 'Article: Brainstorming without Constraints', desc: 'Learn how to generate 50+ divergent ideas during brainstorming.', dur: '7 mins', minutes: 7 }
                     ]
                 },
                 'user-research': {
@@ -206,9 +211,9 @@
                     skills: ['Empathy', 'Research', 'Problem Solving', 'Creativity', 'User Thinking'],
                     tip: 'Since you enjoyed Design Thinking, spend extra time on User Research before moving ahead.',
                     resources: [
-                        { type: 'guide', title: 'Guide: Conducting Effective User Interviews', desc: 'Preparation rules, bias avoidance, and recording scripts.', dur: '10 mins' },
-                        { type: 'read', title: 'Article: Creating Realistic User Personas', desc: 'How to cluster behavior patterns into relatable target user archetypes.', dur: '8 mins' },
-                        { type: 'challenge', title: 'Challenge: Draft Your First Interview Script', desc: 'Create 5 open-ended user questions for a banking application.', dur: '7 mins' }
+                        { id: 'user-research-interviews', type: 'guide', title: 'Guide: Conducting Effective User Interviews', desc: 'Preparation rules, bias avoidance, and recording scripts.', dur: '10 mins', minutes: 10 },
+                        { id: 'user-research-personas', type: 'read', title: 'Article: Creating Realistic User Personas', desc: 'How to cluster behavior patterns into relatable target user archetypes.', dur: '8 mins', minutes: 8 },
+                        { id: 'user-research-script', type: 'challenge', title: 'Challenge: Draft Your First Interview Script', desc: 'Create 5 open-ended user questions for a banking application.', dur: '7 mins', minutes: 7 }
                     ]
                 },
                 'wireframing': {
@@ -218,9 +223,9 @@
                     skills: ['Sketching', 'UI Skeleton Layout', 'Figma Basics', 'Interaction mapping'],
                     tip: 'Begin with paper and pen. Sketching fast ideas helps you iterate without getting locked into layout details.',
                     resources: [
-                        { type: 'guide', title: 'Guide: Low-Fidelity Sketching Techniques', desc: 'Speed wireframing layout practices using basic boxes and shapes.', dur: '15 mins' },
-                        { type: 'read', title: 'Article: Digital Wireframing Tools Guide', desc: 'How to construct wireframe layouts efficiently in modern tools.', dur: '10 mins' },
-                        { type: 'challenge', title: 'Challenge: Design a Landing Page Sketch', desc: 'Map a Luma homepage layout skeleton onto a grid coordinate sheet.', dur: '15 mins' }
+                        { id: 'wireframing-sketching', type: 'guide', title: 'Guide: Low-Fidelity Sketching Techniques', desc: 'Speed wireframing layout practices using basic boxes and shapes.', dur: '15 mins', minutes: 15 },
+                        { id: 'wireframing-tools', type: 'read', title: 'Article: Digital Wireframing Tools Guide', desc: 'How to construct wireframe layouts efficiently in modern tools.', dur: '10 mins', minutes: 10 },
+                        { id: 'wireframing-landing-page', type: 'challenge', title: 'Challenge: Design a Landing Page Sketch', desc: 'Map a Luma homepage layout skeleton onto a grid coordinate sheet.', dur: '15 mins', minutes: 15 }
                     ]
                 },
                 'information-architecture': {
@@ -230,8 +235,8 @@
                     skills: ['User Flows', 'Card Sorting', 'Sitemap Mapping', 'Navigation Menus'],
                     tip: 'Try running a mock closed card sorting test with friends to study how people classify content categories.',
                     resources: [
-                        { type: 'guide', title: 'Guide: Card Sorting Methodologies', desc: 'How to organize labels by asking real users to categorize items.', dur: '12 mins' },
-                        { type: 'read', title: 'Article: Creating Comprehensive Sitemaps', desc: 'Visual blueprints representing page structure hierarchy.', dur: '10 mins' }
+                        { id: 'ia-card-sorting', type: 'guide', title: 'Guide: Card Sorting Methodologies', desc: 'How to organize labels by asking real users to categorize items.', dur: '12 mins', minutes: 12 },
+                        { id: 'ia-sitemaps', type: 'read', title: 'Article: Creating Comprehensive Sitemaps', desc: 'Visual blueprints representing page structure hierarchy.', dur: '10 mins', minutes: 10 }
                     ]
                 },
                 'visual-design': {
@@ -241,8 +246,8 @@
                     skills: ['Grids & Layouts', 'Color Theory', 'Typography Scale', 'Visual Hierarchy'],
                     tip: 'Focus on color contrast check values to ensure accessibility standards are met.',
                     resources: [
-                        { type: 'guide', title: 'Guide: Grid Systems & Layout Layouts', desc: 'Using 8px grids and 12-column systems for clean alignment.', dur: '20 mins' },
-                        { type: 'read', title: 'Article: Selecting Color Palettes', desc: 'Psychology of color selections and semantic accent allocations.', dur: '15 mins' }
+                        { id: 'visual-design-grids', type: 'guide', title: 'Guide: Grid Systems & Layout Layouts', desc: 'Using 8px grids and 12-column systems for clean alignment.', dur: '20 mins', minutes: 20 },
+                        { id: 'visual-design-color', type: 'read', title: 'Article: Selecting Color Palettes', desc: 'Psychology of color selections and semantic accent allocations.', dur: '15 mins', minutes: 15 }
                     ]
                 },
                 'prototyping': {
@@ -252,8 +257,8 @@
                     skills: ['Transitions', 'Interactive Flows', 'Figma Smart Animate', 'Usability Testing'],
                     tip: 'Start with simple click-throughs before diving into complex motion animations.',
                     resources: [
-                        { type: 'guide', title: 'Guide: Interactive Micro-Animations', desc: 'Using transitions to communicate status updates and focus points.', dur: '15 mins' },
-                        { type: 'challenge', title: 'Challenge: Connect a 3-Screen App Flow', desc: 'Wire up login, dashboard, and settings flows in Figma.', dur: '20 mins' }
+                        { id: 'prototyping-micro', type: 'guide', title: 'Guide: Interactive Micro-Animations', desc: 'Using transitions to communicate status updates and focus points.', dur: '15 mins', minutes: 15 },
+                        { id: 'prototyping-flow', type: 'challenge', title: 'Challenge: Connect a 3-Screen App Flow', desc: 'Wire up login, dashboard, and settings flows in Figma.', dur: '20 mins', minutes: 20 }
                     ]
                 }
             };
@@ -282,6 +287,15 @@
             // Render resources list
             const resourcesContainer = document.getElementById('resources-container');
             resourcesContainer.innerHTML = '';
+            const progressState = (() => {
+                try {
+                    const saved = JSON.parse(localStorage.getItem('luma_progress_state') || '{}');
+                    return { completedResourceIds: Array.isArray(saved.completedResourceIds) ? saved.completedResourceIds : [] };
+                } catch (error) {
+                    return { completedResourceIds: [] };
+                }
+            })();
+
             data.resources.forEach(res => {
                 const iconMap = {
                     guide: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"></rect><line x1="9" y1="9" x2="15" y2="9"></line><line x1="9" y1="13" x2="15" y2="13"></line><line x1="9" y1="17" x2="13" y2="17"></line></svg>',
@@ -289,9 +303,9 @@
                     challenge: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>'
                 };
 
+                const isCompleted = progressState.completedResourceIds.includes(res.id);
                 const card = document.createElement('div');
                 card.className = 'resource-premium-card';
-                card.onclick = () => alert(`Opening resource: "${res.title}"...`);
                 card.innerHTML = `
                     <div class="resource-left-info">
                         <div class="resource-icon-box ${res.type}">
@@ -304,9 +318,31 @@
                     </div>
                     <div class="resource-right-action">
                         <span class="resource-duration">${res.dur}</span>
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="color: var(--color-primary);"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        <button type="button" class="resource-complete-btn" data-resource-id="${res.id}" data-title="${res.title}" data-minutes="${res.minutes || 0}" data-concept="${conceptId}" style="padding: 0.4rem 0.8rem; border-radius: 999px; border: 1px solid var(--color-primary); background: ${isCompleted ? 'rgba(114, 199, 133, 0.12)' : 'transparent'}; color: ${isCompleted ? '#1c522a' : 'var(--color-primary)'}; font-weight: 700; font-size: 0.8rem; cursor: ${isCompleted ? 'default' : 'pointer'};">${isCompleted ? 'Completed' : 'Mark Complete'}</button>
                     </div>
                 `;
+
+                const completeBtn = card.querySelector('.resource-complete-btn');
+                completeBtn.addEventListener('click', (event) => {
+                    event.stopPropagation();
+                    if (completeBtn.disabled || completeBtn.textContent === 'Completed') {
+                        return;
+                    }
+                    if (window.completeLearningResource) {
+                        window.completeLearningResource(
+                            completeBtn.getAttribute('data-resource-id'),
+                            completeBtn.getAttribute('data-title'),
+                            Number(completeBtn.getAttribute('data-minutes') || 0),
+                            completeBtn.getAttribute('data-concept') || conceptId
+                        );
+                    }
+                    completeBtn.textContent = 'Completed';
+                    completeBtn.disabled = true;
+                    completeBtn.style.background = 'rgba(114, 199, 133, 0.12)';
+                    completeBtn.style.color = '#1c522a';
+                    completeBtn.style.cursor = 'default';
+                });
+
                 resourcesContainer.appendChild(card);
             });
         });

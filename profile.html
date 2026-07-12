@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script>
+        if (localStorage.getItem('luma_logged_in') !== 'true') {
+            window.location.replace('/login');
+        }
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Profile | Luma</title>
@@ -608,7 +613,7 @@
             </div>
             
             <div class="profile-user-details-column">
-                <h2 style="font-family: 'Playfair Display', serif; font-weight: 700; font-size: 2.2rem; color: var(--color-text-heading); margin: 0;" id="prof-user-name">Amulya R.</h2>
+                <h2 style="font-family: 'Playfair Display', serif; font-weight: 700; font-size: 2.2rem; color: var(--color-text-heading); margin: 0;" id="prof-user-name">Amulya Tanneru</h2>
                 
                 <div class="profile-tags-inline">
                     <span style="display: inline-flex; align-items: center; gap: 4px;">📍 Bangalore, India</span>
@@ -683,7 +688,7 @@
                                 <div class="discussion-user-row">
                                     <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150" alt="Avatar" style="width: 38px; height: 38px; border-radius: 50%; object-fit: cover;">
                                     <div class="discussion-meta-info">
-                                        <strong>Amulya R.</strong> • <span>1 day ago</span>
+                                        <strong>Amulya Tanneru</strong> • <span>1 day ago</span>
                                     </div>
                                 </div>
                                 <h4 class="discussion-title" style="margin: 0.25rem 0;">Excited to start my UI/UX journey on Luma!</h4>
@@ -701,7 +706,7 @@
                                 <div class="discussion-user-row">
                                     <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150" alt="Avatar" style="width: 38px; height: 38px; border-radius: 50%; object-fit: cover;">
                                     <div class="discussion-meta-info">
-                                        <strong>Amulya R.</strong> • <span>3 days ago</span>
+                                        <strong>Amulya Tanneru</strong> • <span>3 days ago</span>
                                     </div>
                                 </div>
                                 <h4 class="discussion-title" style="margin: 0.25rem 0;">My wireframing layout sketches</h4>
@@ -822,10 +827,10 @@
                         <div class="week-progress-wrapper" style="width: 100%;">
                             <div class="week-header" style="display: flex; justify-content: space-between; font-size: 0.82rem; font-weight: 600; color: var(--color-text-body); margin-bottom: 0.3rem;">
                                 <span>Overall Progress</span>
-                                <span>45%</span>
+                                <span id="profile-progress-percent">0%</span>
                             </div>
                             <div class="progress-track" style="height: 6px; width: 100%; background-color: var(--color-neutral); border-radius: 3px; overflow: hidden;">
-                                <div class="progress-bar" style="width: 45%; height: 100%; background: linear-gradient(90deg, var(--color-primary), var(--color-secondary)); border-radius: 3px;"></div>
+                                <div id="profile-progress-bar" class="progress-bar" style="width: 0%; height: 100%; background: linear-gradient(90deg, var(--color-primary), var(--color-secondary)); border-radius: 3px;"></div>
                             </div>
                         </div>
 
@@ -853,7 +858,7 @@
                             </div>
                             <div class="achievement-row-item">
                                 <span class="achievement-badge-circle completed">🔥</span>
-                                <strong>7-Day Learning Streak</strong>
+                                <strong id="profile-reminder-text">Start your first lesson to begin tracking progress.</strong>
                             </div>
                             <!-- Locked: Dust Grey (#E2D9D9 / #8E8495) -->
                             <div class="achievement-row-item" style="opacity: 0.7;">
@@ -887,20 +892,20 @@
                         
                         <div class="quick-stats-grid-2x2">
                             <div class="quick-stat-box-card">
-                                <span class="quick-stat-val">32 hrs</span>
-                                <span class="quick-stat-lbl">Learning Hours</span>
+                                <span id="profile-learning-time" class="quick-stat-val">0 minutes</span>
+                                <span class="quick-stat-lbl">Estimated Learning Time</span>
                             </div>
                             <div class="quick-stat-box-card">
-                                <span class="quick-stat-val">18</span>
-                                <span class="quick-stat-lbl">Lessons Done</span>
+                                <span id="profile-resources-count" class="quick-stat-val">0</span>
+                                <span class="quick-stat-lbl">Resources</span>
                             </div>
                             <div class="quick-stat-box-card">
-                                <span class="quick-stat-val">5</span>
+                                <span id="profile-projects-count" class="quick-stat-val">0</span>
                                 <span class="quick-stat-lbl">Projects</span>
                             </div>
                             <div class="quick-stat-box-card">
-                                <span class="quick-stat-val">8</span>
-                                <span class="quick-stat-lbl">Communities</span>
+                                <span id="profile-streak-value" class="quick-stat-val">0 Days</span>
+                                <span class="quick-stat-lbl">Streak</span>
                             </div>
                         </div>
                     </div>
@@ -1047,7 +1052,7 @@
                         <div class="discussion-user-row">
                             <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150" alt="Avatar" style="width: 38px; height: 38px; border-radius: 50%; object-fit: cover;">
                             <div class="discussion-meta-info">
-                                <strong>Amulya R.</strong> • <span>Just now</span> in <span style="color: var(--color-secondary); font-weight:600;">${comm}</span>
+                                <strong>Amulya Tanneru</strong> • <span>Just now</span> in <span style="color: var(--color-secondary); font-weight:600;">${comm}</span>
                             </div>
                         </div>
                         <h4 class="discussion-title" style="margin: 0.25rem 0;">${title}</h4>

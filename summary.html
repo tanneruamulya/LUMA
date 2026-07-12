@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script>
+        if (localStorage.getItem('luma_logged_in') !== 'true') {
+            window.location.replace('/login');
+        }
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Summary | Luma</title>
@@ -519,11 +524,11 @@
                 <div style="display: flex; gap: 25px; margin-top: 0.25rem; font-size: 0.95rem;">
                     <div>
                         <span style="color: var(--color-text-muted);">Current Streak</span>
-                        <strong style="color: var(--color-text-heading); display: block; margin-top: 0.15rem; font-size: 1.15rem;">🔥 12 Days</strong>
+                        <strong id="summary-streak-count" style="color: var(--color-text-heading); display: block; margin-top: 0.15rem; font-size: 1.15rem;">🔥 0 Days</strong>
                     </div>
                     <div style="border-left: 1px solid var(--color-neutral); padding-left: 25px;">
                         <span style="color: var(--color-text-muted);">Longest Streak</span>
-                        <strong style="color: var(--color-text-heading); display: block; margin-top: 0.15rem; font-size: 1.15rem;">🔥 21 Days</strong>
+                        <strong style="color: var(--color-text-heading); display: block; margin-top: 0.15rem; font-size: 1.15rem;">🔥 0 Days</strong>
                     </div>
                 </div>
             </div>
@@ -544,25 +549,25 @@
                             <circle class="circle-bg-ring" cx="60" cy="60" r="54" stroke-width="8"/>
                             <circle id="sum-circle-fill" class="circle-fill-ring" cx="60" cy="60" r="54" stroke-width="8"/>
                         </svg>
-                        <span class="circle-percentage-text">45%</span>
+                        <span id="sum-circle-percentage" class="circle-percentage-text">0%</span>
                     </div>
 
                     <div class="progress-stats-column">
                         <div class="progress-stat-row-item">
                             <span style="color: var(--color-text-muted); font-weight: 500;">Lessons Completed</span>
-                            <strong style="color: var(--color-text-heading);">18 / 40</strong>
+                            <strong id="summary-resources-count" style="color: var(--color-text-heading);">0</strong>
                         </div>
                         <div class="progress-stat-row-item">
                             <span style="color: var(--color-text-muted); font-weight: 500;">Projects Completed</span>
-                            <strong style="color: var(--color-text-heading);">3</strong>
+                            <strong id="summary-projects-count" style="color: var(--color-text-heading);">0</strong>
                         </div>
                         <div class="progress-stat-row-item">
                             <span style="color: var(--color-text-muted); font-weight: 500;">Challenges Completed</span>
-                            <strong style="color: var(--color-text-heading);">5</strong>
+                            <strong id="summary-weekly-count" style="color: var(--color-text-heading);">0</strong>
                         </div>
                         <div class="progress-stat-row-item">
                             <span style="color: var(--color-text-muted); font-weight: 500;">Communities Joined</span>
-                            <strong style="color: var(--color-text-heading);">4</strong>
+                            <strong id="summary-certificates-count" style="color: var(--color-text-heading);">0</strong>
                         </div>
                     </div>
                 </div>
@@ -572,7 +577,7 @@
             <div class="dash-premium-card" style="border-radius: 24px;">
                 <span class="card-header-title">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-                    Learning Hours
+                    Estimated Learning Time
                 </span>
 
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 0.25rem;">
@@ -590,7 +595,7 @@
                         <div class="stat-icon-wrapper" style="color: var(--color-secondary); background-color: rgba(212,128,187,0.08);">⚡</div>
                         <div>
                             <span style="color: var(--color-text-muted); font-size: 0.85rem; font-weight: 500; display: block;">Daily Average</span>
-                            <strong style="color: var(--color-text-heading); font-size: 1.25rem;">1.5 hrs</strong>
+                            <strong style="color: var(--color-text-heading); font-size: 1.25rem;">0 minutes</strong>
                         </div>
                     </div>
 
@@ -599,7 +604,7 @@
                         <div class="stat-icon-wrapper" style="color: var(--color-accent); background-color: rgba(222,175,194,0.12);">📅</div>
                         <div>
                             <span style="color: var(--color-text-muted); font-size: 0.85rem; font-weight: 500; display: block;">This Week</span>
-                            <strong style="color: var(--color-text-heading); font-size: 1.25rem;">8 hrs</strong>
+                            <strong style="color: var(--color-text-heading); font-size: 1.25rem;">0 minutes</strong>
                         </div>
                     </div>
 
