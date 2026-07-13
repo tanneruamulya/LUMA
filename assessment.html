@@ -3,7 +3,7 @@
 <head>
     <script>
         if (localStorage.getItem('luma_logged_in') !== 'true') {
-            window.location.replace('/login');
+            window.location.replace('auth.html');
         }
     </script>
     <meta charset="UTF-8">
@@ -440,7 +440,7 @@
             } else {
                 // Done! Save to localStorage
                 saveAssessmentAnswers();
-                window.location.href = '/recommendations';
+                window.location.replace('recommendations.html');
             }
         });
 

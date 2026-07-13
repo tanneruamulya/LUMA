@@ -3,7 +3,7 @@
 <head>
     <script>
         if (localStorage.getItem('luma_logged_in') !== 'true') {
-            window.location.replace('/login');
+            window.location.replace('auth.html');
         }
     </script>
     <meta charset="UTF-8">
@@ -506,7 +506,7 @@
                     localStorage.setItem('luma_recommendations', JSON.stringify(recommendations));
 
                     await Promise.resolve();
-                    window.location.replace('/dashboard');
+                    window.location.replace('dashboard.html');
                 } catch (error) {
                     console.error('Failed to finalize assessment', error);
                     startBtn.disabled = false;

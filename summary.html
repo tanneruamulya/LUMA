@@ -3,7 +3,7 @@
 <head>
     <script>
         if (localStorage.getItem('luma_logged_in') !== 'true') {
-            window.location.replace('/login');
+            window.location.replace('auth.html');
         }
     </script>
     <meta charset="UTF-8">
@@ -381,30 +381,30 @@
             </a>
 
             <nav class="sidebar-links">
-                <a href="/dashboard" class="sidebar-item">
+                <a href="dashboard.html" class="sidebar-item">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9"></rect><rect x="14" y="3" width="7" height="5"></rect><rect x="14" y="12" width="7" height="9"></rect><rect x="3" y="16" width="7" height="5"></rect></svg>
                     <span>Dashboard</span>
                 </a>
-                <a href="/learning-hub" class="sidebar-item">
+                <a href="learning.html" class="sidebar-item">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
                     <span>Learning Hub</span>
                 </a>
-                <a href="/journey" class="sidebar-item">
+                <a href="journey.html" class="sidebar-item">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"></polygon></svg>
                     <span>Journey</span>
                 </a>
-                <a href="/explorer-hub" class="sidebar-item">
+                <a href="explorer.html" class="sidebar-item">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle></svg>
                     <span>Explorer Hub</span>
                 </a>
-                <a href="/summary" class="sidebar-item active">
+                <a href="summary.html" class="sidebar-item active">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
                     <span>Summary</span>
                 </a>
             </nav>
         </div>
 
-        <a href="/profile" class="sidebar-profile">
+        <a href="profile.html" class="sidebar-profile">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
             <span>Profile</span>
         </a>
@@ -412,23 +412,23 @@
 
     <!-- Mobile Bottom Navigation Bar -->
     <nav class="mobile-bottom-nav" aria-label="Mobile Navigation">
-        <a href="/dashboard" class="mobile-nav-item">
+        <a href="dashboard.html" class="mobile-nav-item">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9"></rect><rect x="14" y="3" width="7" height="5"></rect><rect x="14" y="12" width="7" height="9"></rect><rect x="3" y="16" width="7" height="5"></rect></svg>
             <span>Dashboard</span>
         </a>
-        <a href="/learning-hub" class="mobile-nav-item">
+        <a href="learning.html" class="mobile-nav-item">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
             <span>Learning</span>
         </a>
-        <a href="/journey" class="mobile-nav-item">
+        <a href="journey.html" class="mobile-nav-item">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"></polygon></svg>
             <span>Journey</span>
         </a>
-        <a href="/explorer-hub" class="mobile-nav-item">
+        <a href="explorer.html" class="mobile-nav-item">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle></svg>
             <span>Explorer</span>
         </a>
-        <a href="/summary" class="mobile-nav-item active">
+        <a href="summary.html" class="mobile-nav-item active">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
             <span>Summary</span>
         </a>
@@ -685,7 +685,7 @@
 
         <!-- BOTTOM BUTTONS -->
         <div style="display: flex; gap: 1.25rem; justify-content: center; margin-bottom: 1rem;">
-            <button class="btn btn-solid" style="background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%); color: var(--color-white); border: none; padding: 0.95rem 2.2rem; font-weight: 700; border-radius: 50px; font-size: 1rem; box-shadow: 0 4px 15px rgba(167, 117, 201, 0.25);" onclick="window.location.href='/learning-hub';">Continue Learning</button>
+            <button class="btn btn-solid" style="background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%); color: var(--color-white); border: none; padding: 0.95rem 2.2rem; font-weight: 700; border-radius: 50px; font-size: 1rem; box-shadow: 0 4px 15px rgba(167, 117, 201, 0.25);" onclick="window.location.href='learning.html';">Continue Learning</button>
             <button class="btn btn-outline" style="border: 1.5px solid var(--color-primary); color: var(--color-primary); padding: 0.95rem 2.2rem; font-weight: 700; border-radius: 50px; font-size: 1rem; background-color: var(--color-white);" onclick="alert('Viewing your Luma learning profile details...');">View Profile</button>
         </div>
     </main>

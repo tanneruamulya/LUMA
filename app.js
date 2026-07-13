@@ -10,6 +10,60 @@
    - Authentication session management
    ========================================================================== */
 
+// ============================================================================
+// HELPER FUNCTION: Get current page name reliably for deployment
+// ============================================================================
+const getCurrentPageName = () => {
+    let pathname = window.location.pathname.toLowerCase();
+    // Remove leading/trailing slashes
+    pathname = pathname.replace(/^\/+|\/+$/g, '');
+    
+    // Default to index.html if empty
+    if (!pathname || pathname === '') {
+        return 'index.html';
+    }
+    
+    // Map clean route paths to their physical file names
+    if (pathname === 'login' || pathname === 'signup' || pathname === 'auth') {
+        return 'auth.html';
+    }
+    if (pathname === 'discovery-assessment' || pathname === 'assessment') {
+        return 'assessment.html';
+    }
+    if (pathname === 'recommendations') {
+        return 'recommendations.html';
+    }
+    if (pathname === 'dashboard') {
+        return 'dashboard.html';
+    }
+    if (pathname === 'learning-hub' || pathname === 'learning') {
+        return 'learning.html';
+    }
+    if (pathname === 'learning-concept') {
+        return 'learning-concept.html';
+    }
+    if (pathname === 'journey') {
+        return 'journey.html';
+    }
+    if (pathname === 'explorer-hub' || pathname === 'explorer') {
+        return 'explorer.html';
+    }
+    if (pathname === 'summary') {
+        return 'summary.html';
+    }
+    if (pathname === 'profile') {
+        return 'profile.html';
+    }
+
+    // Get last segment
+    const filename = pathname.split('/').pop() || '';
+    if (filename.endsWith('.html')) {
+        return filename;
+    }
+    
+    return 'index.html';
+};
+
 document.addEventListener('DOMContentLoaded', () => {
 
     // Initialize local user storage without hardcoded demo accounts
@@ -18,7 +72,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Auto logout on landing page load to always display Login & Sign Up buttons as requested
-    if (window.location.pathname === '/' || window.location.pathname.endsWith('/index.html') || window.location.pathname === '') {
+    const pageName = getCurrentPageName();
+    const isLandingPage = pageName === 'index.html';
+    if (isLandingPage) {
         localStorage.removeItem('luma_logged_in');
         localStorage.removeItem('luma_user');
     }
@@ -133,37 +189,30 @@ document.addEventListener('DOMContentLoaded', () => {
     // --------------------------------------------------------------------------
     const checkSession = () => {
         const loggedIn = localStorage.getItem('luma_logged_in') === 'true';
-        
-        const isAuthPage = window.location.pathname.includes('/discovery-assessment') || 
-                           window.location.pathname.includes('/recommendations') || 
-                           window.location.pathname.includes('/dashboard') || 
-                           window.location.pathname.includes('/learning-hub') || 
-                           window.location.pathname.includes('/learning-concept') ||
-                           window.location.pathname.includes('/journey') ||
-                           window.location.pathname.includes('/explorer-hub') ||
-                           window.location.pathname.includes('/summary') ||
-                           window.location.pathname.includes('/profile') ||
-                           window.location.pathname.endsWith('/assessment.html') ||
-                           window.location.pathname.endsWith('/recommendations.html') ||
-                           window.location.pathname.endsWith('/dashboard.html') ||
-                           window.location.pathname.endsWith('/learning.html') ||
-                           window.location.pathname.endsWith('/learning-concept.html') ||
-                           window.location.pathname.endsWith('/journey.html') ||
-                           window.location.pathname.endsWith('/explorer.html') ||
-                           window.location.pathname.endsWith('/summary.html') ||
-                           window.location.pathname.endsWith('/profile.html');
+        const pageName = getCurrentPageName();
+        const isAuthPage = pageName === 'auth.html';
+        const isLandingPage = pageName === 'index.html';
+        const protectedPages = ['assessment.html', 'dashboard.html', 'learning.html', 'learning-concept.html', 'journey.html', 'explorer.html', 'summary.html', 'profile.html', 'recommendations.html'];
+        const isProtectedPage = protectedPages.includes(pageName);
+        const shouldBlockDashboard = pageName === 'dashboard.html' && localStorage.getItem('luma_assessment_completed') !== 'true';
 
-        const isLoginPage = window.location.pathname === '/login' || 
-                            window.location.pathname === '/signup' || 
-                            window.location.pathname.endsWith('/auth.html');
-
-        if (loggedIn && isLoginPage) {
-            window.location.replace('/discovery-assessment');
+        if (loggedIn && isAuthPage) {
+            const completed = localStorage.getItem('luma_assessment_completed') === 'true';
+            if (completed) {
+                window.location.replace('dashboard.html');
+            } else {
+                window.location.replace('assessment.html');
+            }
             return;
         }
 
-        if (!loggedIn && isAuthPage) {
-            window.location.replace('/login');
+        if (!loggedIn && isProtectedPage) {
+            window.location.replace('auth.html');
+            return;
+        }
+
+        if (shouldBlockDashboard) {
+            window.location.replace('assessment.html');
             return;
         }
         
@@ -238,29 +287,11 @@ document.addEventListener('DOMContentLoaded', () => {
             localStorage.removeItem('luma_logged_in');
             localStorage.removeItem('luma_user');
             
-            const isAuthPath = window.location.pathname === '/login' || 
-                               window.location.pathname === '/signup' || 
-                               window.location.pathname === '/discovery-assessment' ||
-                               window.location.pathname === '/recommendations' ||
-                               window.location.pathname === '/dashboard' ||
-                               window.location.pathname === '/learning-hub' ||
-                               window.location.pathname === '/learning-concept' ||
-                               window.location.pathname === '/journey' ||
-                               window.location.pathname === '/explorer-hub' ||
-                               window.location.pathname === '/summary' ||
-                               window.location.pathname === '/profile' ||
-                               window.location.pathname.endsWith('/assessment.html') ||
-                               window.location.pathname.endsWith('/recommendations.html') ||
-                               window.location.pathname.endsWith('/dashboard.html') ||
-                               window.location.pathname.endsWith('/learning.html') ||
-                               window.location.pathname.endsWith('/learning-concept.html') ||
-                               window.location.pathname.endsWith('/journey.html') ||
-                               window.location.pathname.endsWith('/explorer.html') ||
-                               window.location.pathname.endsWith('/summary.html') ||
-                               window.location.pathname.endsWith('/profile.html');
+            const pageName = getCurrentPageName();
+            const isAuthPath = pageName === 'auth.html' || pageName === 'assessment.html' || pageName === 'recommendations.html' || pageName === 'dashboard.html' || pageName === 'learning.html' || pageName === 'learning-concept.html' || pageName === 'journey.html' || pageName === 'explorer.html' || pageName === 'summary.html' || pageName === 'profile.html';
 
             if (isAuthPath) {
-                window.location.replace('/');
+                window.location.replace('index.html');
             } else {
                 checkSession();
                 if (dropdownMenuDesktop) dropdownMenuDesktop.classList.remove('active');
@@ -278,49 +309,37 @@ document.addEventListener('DOMContentLoaded', () => {
     const panelSignup = document.getElementById('panel-signup');
 
     if (tabLogin && tabSignup && panelLogin && panelSignup) {
-        // Tab switching functions
-        const activateLoginTab = (updateUrl = true) => {
+        const activateLoginTab = () => {
             tabLogin.classList.add('active');
             tabSignup.classList.remove('active');
             panelLogin.classList.add('active');
             panelSignup.classList.remove('active');
-            if (updateUrl && window.location.pathname !== '/login') {
-                history.pushState(null, '', '/login');
-            }
         };
 
-        const activateSignupTab = (updateUrl = true) => {
+        const activateSignupTab = () => {
             tabSignup.classList.add('active');
             tabLogin.classList.remove('active');
             panelSignup.classList.add('active');
             panelLogin.classList.remove('active');
-            if (updateUrl && window.location.pathname !== '/signup') {
-                history.pushState(null, '', '/signup');
-            }
         };
 
         tabLogin.addEventListener('click', () => activateLoginTab());
         tabSignup.addEventListener('click', () => activateSignupTab());
 
-        // Bind switching prompts at the bottom
         const linkToSignup = document.getElementById('link-go-to-signup');
         const linkToLogin = document.getElementById('link-go-to-login');
         if (linkToSignup) linkToSignup.addEventListener('click', (e) => { e.preventDefault(); activateSignupTab(); });
         if (linkToLogin) linkToLogin.addEventListener('click', (e) => { e.preventDefault(); activateLoginTab(); });
 
-        // Route initially on page load based on pathname
-        const syncTabWithUrl = () => {
-            if (window.location.pathname === '/signup') {
-                activateSignupTab(false);
-            } else {
-                activateLoginTab(false);
-            }
-        };
-
-        syncTabWithUrl();
-
-        // Listen for browser back/forward buttons
-        window.addEventListener('popstate', syncTabWithUrl);
+        // Check URL path or hash to activate the correct tab dynamically
+        const currentPath = window.location.pathname.toLowerCase();
+        const currentHash = window.location.hash.toLowerCase();
+        
+        if (currentPath.includes('signup') || currentHash === '#signup') {
+            activateSignupTab();
+        } else {
+            activateLoginTab();
+        }
     }
 
     // --------------------------------------------------------------------------
@@ -471,9 +490,9 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => {
             const completed = localStorage.getItem('luma_assessment_completed') === 'true';
             if (completed) {
-                window.location.replace('/dashboard');
+                window.location.replace('dashboard.html');
             } else {
-                window.location.replace('/discovery-assessment');
+                window.location.replace('assessment.html');
             }
         }, 750); // 500-800ms loading duration
     };

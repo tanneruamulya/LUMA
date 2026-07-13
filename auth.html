@@ -19,7 +19,12 @@
     <!-- Instant check to prevent auth page flash when already logged in -->
     <script>
         if (localStorage.getItem('luma_logged_in') === 'true') {
-            window.location.replace('/discovery-assessment');
+            const completed = localStorage.getItem('luma_assessment_completed') === 'true';
+            if (completed) {
+                window.location.replace('dashboard.html');
+            } else {
+                window.location.replace('assessment.html');
+            }
         }
     </script>
 </head>
@@ -28,7 +33,7 @@
     <div class="auth-container">
         <!-- Left Side: Branding and Illustration -->
         <div class="auth-left">
-            <a href="/" class="auth-logo">
+            <a href="index.html" class="auth-logo">
                 <svg width="28" height="28" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <defs>
                         <linearGradient id="logoGradAuth" x1="0%" y1="0%" x2="100%" y2="100%">

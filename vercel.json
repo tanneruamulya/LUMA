@@ -1,0 +1,16 @@
+{
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/login", "destination": "/auth.html" },
+    { "source": "/signup", "destination": "/auth.html" },
+    { "source": "/discovery-assessment", "destination": "/assessment.html" },
+    { "source": "/recommendations", "destination": "/recommendations.html" },
+    { "source": "/dashboard", "destination": "/dashboard.html" },
+    { "source": "/learning-hub", "destination": "/learning.html" },
+    { "source": "/learning-concept", "destination": "/learning-concept.html" },
+    { "source": "/journey", "destination": "/journey.html" },
+    { "source": "/explorer-hub", "destination": "/explorer.html" },
+    { "source": "/summary", "destination": "/summary.html" },
+    { "source": "/profile", "destination": "/profile.html" }
+  ]
+}
